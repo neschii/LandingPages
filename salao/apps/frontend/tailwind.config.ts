@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: { 
+      fontFamily: {
+        macondo: ['Macondo', 'cursive'],
+    },
       colors: { 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -1,13 +1,21 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
 export default function Logo() { 
     return ( 
-                    <div className="flex flex-col justify-center h-full">
-                <span className="text-xl sm:text-2xl font-extralight leading-6 tracking-widest text-gradient">
-                    Barba
+             <Link href="/" className="flex items-center h-32">
+            <Image src="/logo.png" alt="Logo" width={170} height={170} className="hidden sm:block" />
+            <Image src="/logo.png" alt="Logo" width={150} height={155} className="block sm:hidden" />
+
+                <div className="flex flex-col justify-center h-full">
+                <span className="text-xl sm:text-2xl font-extralight leading-6 tracking-widest text-violet-800">
+                    Nyx
                 </span>
-                <span className="text-[20px] sm:text-[24px] font-bold leading-6 pl-px text-gradient">
-                    Brutal
+                <span className="text-[20px] sm:text-[24px] font-bold leading-6 pl-px text-violet-800">
+                    Salão
                 </span>
             </div>
+            </Link>
 
 )
 }
