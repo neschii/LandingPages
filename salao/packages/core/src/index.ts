@@ -1,4 +1,4 @@
 export * from './constants'
-export * from './profissional'
-export * from './servico'
+export * from './professional'
+export * from './Service'
 export * from './usuario'

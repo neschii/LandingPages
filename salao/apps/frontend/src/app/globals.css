@@ -53,7 +53,7 @@
     }
 
     .text-gradient {
-        @apply bg-gradient-to-r from-white to-zinc-400;
+        @apply bg-gradient-to-r from-pink-500 via-indigo-500 to-pink-500;
         @apply bg-clip-text text-transparent;
     }
 }

@@ -1,11 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+
+
+
 export default function Logo() { 
     return ( 
              <Link href="/" className="flex items-center h-32">
-            <Image src="/logo.png" alt="Logo" width={170} height={170} className="hidden sm:block" />
-            <Image src="/logo.png" alt="Logo" width={150} height={155} className="block sm:hidden" />
+            <Image src="/logo.png" alt="Logo" width={120} height={150} className="hidden sm:block" />
+            <Image src="/logo.png" alt="Logo" width={100} height={100} className="block sm:hidden" />
 
                 <div className="flex flex-col justify-center h-full">
                 <span className="text-xl sm:text-2xl font-extralight leading-6 tracking-widest text-violet-800">

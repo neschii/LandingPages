@@ -7,8 +7,8 @@ import Logo from './Logo'
 
 export default function Footer() { 
     return (
-    <footer className="flex items-center bg-rose-100">
-                <div className="container flex flex-col gap-5 py-10">
+    <footer className="flex items-center bg-violet-200">
+                <div className="container flex flex-col gap-5 py-5">
                 <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-1">
                     <Logo  />
                 <div className="flex flex-col gap-1 items-center md:items-start ">

@@ -1,5 +1,5 @@
 import clientes from './clientes'
-import profissionais from './profissionais'
-import servicos from './servicos'
+import professionals from './professional'
+import services from './services'
 
-export { clientes, profissionais, servicos }
+export { clientes, professionals, services }
