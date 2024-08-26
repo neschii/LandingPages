@@ -39,7 +39,7 @@ export default function PageAgendamento() {
     }
 
     return (
-        <div className="flex flex-col bg-red-900">
+        <div className="flex flex-col bg-black-900">
             <Header 
                 title="lorem ipsum"
                 description="lorem lorem lorem"

@@ -1,5 +1,5 @@
 import { useContext } from "react";
 import UserContext from '../contexts/UserContext.tsx'
 
-const UseUser = () => useContext(UserContext)
-export default UseUser 
+const useUser = () => useContext(UserContext)
+export default useUser 

@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
+    "./src/**/*.{html,js}",
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
@@ -77,7 +78,11 @@ const config = {
       },
     },
   },  
-  plugins: [require("tailwindcss-animate")],
+ plugins: [
+    require("tailwindcss-animate"),
+    require("@designbycode/tailwindcss-text-stroke")
+ ]
 } satisfies Config
+
 
 export default config;

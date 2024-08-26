@@ -5,7 +5,7 @@ export interface PageProps {
 }
 export default function Page(props: PageProps) {
     return (
-        <div className="flex flex-col min-h-screen w-screen">
+        <div className="flex flex-col content=width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
             <main>{props.children}</main>
             <Footer />
         </div>

@@ -14,6 +14,7 @@
     "@types/prop-types": "^15.7.12",
     "@types/through": "^0.0.33",
     "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.10",
     "turbo": "^2.0.9",
     "typescript": "^5.5.4"
   },
@@ -26,6 +27,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@designbycode/tailwindcss-text-stroke": "^1.2.1",
     "glob": "^11.0.0",
     "pretty-format": "^29.7.0"
   }

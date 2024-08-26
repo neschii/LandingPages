@@ -9,7 +9,7 @@ export default function Landing() {
   return (
     <div>
       <TitleSlogan />
-        <BgContainer img="/banners/services.jpeg">
+        <BgContainer img="/banners/servicesbg.jpeg">
           <TeamService /> 
         </BgContainer>
 

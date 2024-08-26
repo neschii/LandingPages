@@ -45,8 +45,8 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
     }
 
     function totalPrice() {
-        return services.reduce((acc, actual) => { // Corrected typo
-            return (acc += actual.price); // Corrected typo
+        return services.reduce((acc, actual) => { 
+            return (acc += actual.price); 
         }, 0);
     }
 
@@ -62,7 +62,7 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
         return totalSlots;
     }
 
-    async function scheduled() { // Changed to lowercase
+    async function scheduled() { 
         if (!user?.email) return;
 
         await httpPost('agendamentos', {
@@ -76,7 +76,7 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
     }
 
     function clear() {
-        setData(DataUtils.today()); // Changed "hoje" to "today" to match previous usage
+        setData(DataUtils.today()); 
         setAvailableHour([]);
         setProfessional(null);
         setServices([]);

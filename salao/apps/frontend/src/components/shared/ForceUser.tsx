@@ -1,9 +1,9 @@
 'use client'
 import { usePathname, useRouter } from 'next/navigation'
-import UseUser from '@/data/hooks/UseUser'
+import useUser from '@/data/hooks/useUser'
 
 export default function ForceUser(props: any) {
-    const { loading , user } = UseUser()
+    const { loading , user } = useUser()
     const UserPath = usePathname()
     const router = useRouter()
 

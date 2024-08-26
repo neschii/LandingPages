@@ -14,11 +14,11 @@ export default function TeamService() {
     }
 
     return (
-        <div className=" py-10 -mx-1flex flex-col gap-16">
+        <div className="py-10 m-2 flex flex-col gap-12 ">
             <PageTitle 
                 tag="Serviços"
                 principal="Do Clássico ao Inovador!"
-                secundario="Experimente a transformação em nosso salão moderno e colorido! Oferecemos uma variedade de serviços, desde cortes e coloração até tratamentos faciais. Nossos profissionais qualificados realçam sua beleza natural em um ambiente acolhedor e inovador."
+                secundario="Oferecemos uma variedade de serviços, desde cortes e coloração até tratamentos faciais. Nossos profissionais qualificados realçam sua beleza natural em um ambiente acolhedor e inovador."
             />
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
                 {services.map((service: Service) => (
