@@ -8,7 +8,7 @@ const services: Service[] = [
             'Hidrate, corte, pinte, colora e mude de visual. Seus cabelos estarão na mão da nossa talentosa profissional.',
         price: 100,
         slotAmount: 3,
-        imagemURL: '',
+        imagemURL: '/services/servicos.jpg',
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ const services: Service[] = [
             'Que tal pintar a unha? Cuidar do pé? Ou até mesmo colocar alongamento de unha de porcelana?',
         price: 80,
         slotAmount: 2,
-        imagemURL: '',
+        imagemURL: '/services/unhas.jpg',
     },
     {
         id: 3,
@@ -26,7 +26,7 @@ const services: Service[] = [
             'Revitalize seu rosto com a nossa incrível limpeza de pele, modele suas sobrancelhas e faça a depilação. Aqui cuidamos do seu bem-estar!',
         price: 160,
         slotAmount: 2,
-        imagemURL: '',
+        imagemURL: '/services/pele.jpg',
     },
     {
         id: 4,
@@ -35,7 +35,7 @@ const services: Service[] = [
             'Permita-se um dia de puro luxo e relaxamento com nosso combo exclusivo! O Dia de Princesa inclui manicure, pedicure, depilação, design de sobrancelhas, hidratação capilar, limpeza de pele e uma massagem revigorante.',
         price: 310,
         slotAmount: 2,
-        imagemURL: '',
+        imagemURL: '/services/princesas.png',
     },
     {
         id: 5,
@@ -44,7 +44,7 @@ const services: Service[] = [
             'Tenha um dia incrível sendo tratada como noiva! O Dia da Noiva incluí, limpeza de pele, design de sobrancelhas, depilação, manicure e pedicure, corte e hidratação capilar e uma massagem relaxante.',
         price: 430,
         slotAmount: 2,
-        imagemURL: '',
+        imagemURL: '/services/mesnoiva.jpg',
     },
     {
         id: 6,
@@ -53,7 +53,7 @@ const services: Service[] = [
             'O Combo do Mês inclui uma hidratação de cabelo, manicure e pedicure, limpeza de pele e design de sobrancelha',
         price: 250,
         slotAmount: 2,
-        imagemURL: '',
+        imagemURL: '/services/mes.png',
     },
 
 
