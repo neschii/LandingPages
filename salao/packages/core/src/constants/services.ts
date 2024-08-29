@@ -21,7 +21,7 @@ const services: Service[] = [
     },
     {
         id: 3,
-        name: 'Estética facial e corpo',
+        name: 'Facial/Corpo',
         description:
             'Revitalize seu rosto com a nossa incrível limpeza de pele, modele suas sobrancelhas e faça a depilação. Aqui cuidamos do seu bem-estar!',
         price: 160,

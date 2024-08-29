@@ -11,10 +11,10 @@ export default function Logo() {
             <Image src="/logo.png" alt="Logo" width={100} height={100} className="block sm:hidden" />
 
                 <div className="flex flex-col justify-center h-full">
-                <span className="text-xl sm:text-2xl font-extralight leading-6 tracking-widest text-violet-800">
+                <span className="text-xl sm:text-2xl font-extralight leading-6 tracking-widest text-pink-200">
                     Nyx
                 </span>
-                <span className="text-[20px] sm:text-[24px] font-bold leading-6 pl-px text-violet-800">
+                <span className="text-[20px] sm:text-[24px] font-bold leading-6 pl-px text-pink-200">
                     Salão
                 </span>
             </div>

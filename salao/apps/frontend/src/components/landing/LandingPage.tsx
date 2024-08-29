@@ -2,7 +2,7 @@ import Menu from '@/components/shared/Menu'
 import Image from 'next/image' 
 import Link from 'next/link'
 
-export default function TitleSlogan() { 
+export default function LandingPage() { 
     return ( 
  <div className="px-8 relative mx-auto h-screen">
             <Image src="/banners/salaobg.jpg" fill alt="Salão" className="object-cover" />

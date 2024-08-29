@@ -29,6 +29,8 @@
   "dependencies": {
     "@designbycode/tailwindcss-text-stroke": "^1.2.1",
     "glob": "^11.0.0",
+    "js-cookie": "^2.2.1",
+    "jwt-decode": "^4.0.0",
     "pretty-format": "^29.7.0"
   }
 }

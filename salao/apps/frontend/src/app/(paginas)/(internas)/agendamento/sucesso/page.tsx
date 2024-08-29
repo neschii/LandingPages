@@ -4,7 +4,7 @@ import ScheduleSuccess from "@/components/schedules/ScheduleSuccess"
 
 export default function PageSchedule() { 
   return (
-    <div className="flex flex-col bg-red-500">
+    <div className="flex flex-col bg-pink-200">
       <Header 
       title="Agendamento de Serviços"
       description="Seu horário está garantido e será um prazer te atender!"

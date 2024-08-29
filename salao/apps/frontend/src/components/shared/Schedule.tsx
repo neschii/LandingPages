@@ -2,14 +2,14 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { useState } from 'react'
 
 
-export interface StepProps { 
+export interface ScheduleProps { 
     labels: string[]
     children: any 
     NextStep: boolean 
     NextStepChange(value: boolean): void
 }
 
-export default function Schedule(props: StepProps) { 
+export default function Schedule(props: ScheduleProps) { 
     const [currentStep, setCurrentStep] = useState(0)
 
     function previousStep() { 

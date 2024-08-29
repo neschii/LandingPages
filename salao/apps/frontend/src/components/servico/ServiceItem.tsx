@@ -7,6 +7,8 @@ export interface ServiceItemProps {
 }
 
 export default function ServiceItem(props: ServiceItemProps) {
+    const price = typeof props.service.price === 'number' ? props.service.price : 0;
+
     return (
         <div
             className={`
@@ -20,12 +22,12 @@ export default function ServiceItem(props: ServiceItemProps) {
                 width={150}
                 height={150}
                 alt={props.service.name}
-                className="object-cover "
+                className="object-cover"
             />
             <div className="flex flex-col p-5 gap-2 ">
                 <span className="text-xl font-black text-pink-100 ">{props.service.name}</span>
                 <span className="text-xs text-pink-100 flex-1">{props.service.description}</span>
-                <span className="text-lg font-bold text-pink-100 ">R$ {props.service.price.toFixed(2)}</span>
+                <span className="text-lg font-bold text-pink-100 ">R$ {price.toFixed(2)}</span>
             </div>
         </div>
     )
