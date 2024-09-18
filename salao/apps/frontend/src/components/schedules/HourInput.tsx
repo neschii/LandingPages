@@ -13,12 +13,17 @@ export interface HourInputProps {
 export default function HourInput(props: HourInputProps) {
     const [hourHover, sethourHover] = useState<string | null>(null)
     const { availableHour } = useScheduling()
-    const { manha, tarde, noite } = AgendaUtils.TimeDay()
+    const { manha, tarde, noite } = AgendaUtils.HourDay();
 
-    const selectedHour = props.data.toLocaleTimeString('pt-BR', {
+
+
+const selectedHour = props.data
+    ? props.data.toLocaleTimeString('pt-BR', {
         hour: '2-digit',
         minute: '2-digit',
     })
+    : '';
+
 
     function getTimeDay(hour: string | null, slot: number) {
         if (!hour) return []
@@ -35,9 +40,10 @@ export default function HourInput(props: HourInputProps) {
         const selected =
             selectTime.length === props.slotHour && selectTime.includes(hour)
         const notSelected = !hasHour && periodo.includes(hour)
-        const periodoBloqueado =
-            periodo.includes(hour) && periodo.some((h) => availableHour.includes(h))
-        const busy = availableHour.includes(hour)
+const periodoBloqueado =
+    periodo.includes(hour) && availableHour?.includes(hour);
+const busy = availableHour?.includes(hour);
+
 
         return (
             <div

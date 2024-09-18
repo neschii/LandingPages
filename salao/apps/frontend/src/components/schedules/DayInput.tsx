@@ -11,7 +11,8 @@ export default function DayInput(props: DayInputProps) {
             data.setDate(data.getDate() + 1)
         }
 
-        const select = data.getDate() === props.data.getDate()
+        const select = props.data && data.getDate() === props.data.getDate();
+
         return (
             <div
                 onClick={() => props.dataChange(data)}
