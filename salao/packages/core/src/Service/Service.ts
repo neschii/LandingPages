@@ -1,8 +1,13 @@
-export default interface Service {
-    id: number
+export interface Service {
+    id: string
     name: string
-    description: string
-    price: number
-    slotAmount: number
     imagemURL: string
+    procedimentos: Procedimento[]
+}
+
+export interface Procedimento {
+    id: string
+    name: string
+    price: number
+    duration: number 
 }

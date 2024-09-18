@@ -1,19 +1,24 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { Professional, Service } from '@salao/core';
+import { Professional, Service, Procedimento } from '@salao/core';
 import { DataUtils } from '@salao/core';
 import useUser from '../hooks/useUser';
 import useAPI from '../hooks/useAPI';
 
+interface SelectedService {
+  service: Service;
+  selectedProcedimentos: Procedimento[];
+}
+
 interface ScheduleContextProps { 
     professional: Professional | null;
-    services: Service[];
+    selectedServices: SelectedService[];
     data: Date;
     availableHour: string[];
     totalDuration(): string;
     totalPrice(): number; 
     slotAmount(): number; 
     selectProfessional(professional: Professional): void;
-    selectServices(services: Service[]): void;
+    selectServices(selectedServices: SelectedService[]): void;
     selectData(data: Date): void;
     scheduled(): Promise<void>;
 }
@@ -22,7 +27,7 @@ export const ScheduleContext = createContext({} as ScheduleContextProps);
 
 export function ProviderScheduling({ children }: { children: React.ReactNode }) {
     const [professional, setProfessional] = useState<Professional | null>(null);
-    const [services, setServices] = useState<Service[]>([]);
+    const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
     const [data, setData] = useState<Date>(DataUtils.today());
 
     const { user } = useUser();
@@ -33,20 +38,20 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
         setProfessional(professional);
     }
 
-    function selectServices(services: Service[]) { 
-        setServices(services);
+    function selectServices(services: SelectedService[]) { 
+        setSelectedServices(services);
     }
 
     function totalDuration() { 
-        const duration = services.reduce((acc, actual) => {
-            return (acc += actual.slotAmount * 15);
+        const duration = selectedServices.reduce((acc, { selectedProcedimentos }) => {
+            return acc + selectedProcedimentos.reduce((procAcc, proc) => procAcc + proc.duration, 0);
         }, 0);
         return `${Math.trunc(duration / 60)}h ${duration % 60}m`;
     }
 
     function totalPrice() {
-        return services.reduce((acc, actual) => { 
-            return (acc += actual.price); 
+        return selectedServices.reduce((acc, { selectedProcedimentos }) => { 
+            return acc + selectedProcedimentos.reduce((procAcc, proc) => procAcc + proc.price, 0);
         }, 0);
     }
 
@@ -55,11 +60,10 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
     }, []);
 
     function slotAmount() { 
-        const totalSlots = services.reduce((acc, service) => {
-            return (acc += service.slotAmount);
+        const totalMinutes = selectedServices.reduce((acc, { selectedProcedimentos }) => {
+            return acc + selectedProcedimentos.reduce((procAcc, proc) => procAcc + proc.duration, 0);
         }, 0);
-
-        return totalSlots;
+        return Math.ceil(totalMinutes / 15); // Assuming each slot is 15 minutes
     }
 
     async function scheduled() { 
@@ -69,7 +73,7 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
             emailClient: user.email,
             data: data!,
             professional: professional!,
-            services: services,
+            selectedServices: selectedServices,
         });
 
         clear();
@@ -79,7 +83,7 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
         setData(DataUtils.today()); 
         setAvailableHour([]);
         setProfessional(null);
-        setServices([]);
+        setSelectedServices([]);
     }
 
     const handleAvailableHour = useCallback(
@@ -108,7 +112,7 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
             value={{
                 data,
                 professional,
-                services,
+                selectedServices,
                 availableHour,
                 totalDuration,
                 totalPrice,
