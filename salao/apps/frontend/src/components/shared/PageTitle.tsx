@@ -1,11 +1,10 @@
-export interface TituloProps {
+export interface PageTitleProps {
     tag?: string
     principal: string
-
     secundario: string
 }
 
-export default function Titulo(props: TituloProps) {
+export default function PageTitle(props: PageTitleProps) {
     return (
         <div className="flex flex-col items-center gap-2">
             {props.tag && (

@@ -44,7 +44,7 @@ export default function DayInput(props: DayInputProps) {
             <span className="text-sm uppercase text-zinc-400">Dias Disponíveis</span>
             <div className="flex gap-5 bg-zinc-950 rounded-lg overflow-hidden">
                 {Array.from({ length: 7 })
-                    .map((_, i) => new Date(DataUtils.hoje().getTime() + 86400000 * i))
+                    .map((_, i) => new Date(DataUtils.today().getTime() + 86400000 * i))
                     .filter((date) => date.getDay() !== 0)
                     .map((date) => renderDay(date))}
             </div>

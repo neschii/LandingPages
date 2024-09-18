@@ -1,5 +1,7 @@
-import clientes from './clientes'
+
 import professionals from './professional'
 import services from './services'
 
-export { clientes, professionals, services }
+
+const SLOT_TIME = 15
+export { SLOT_TIME, professionals, services }

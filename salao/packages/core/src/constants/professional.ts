@@ -6,7 +6,7 @@ const professionals: Professional[] = [
         name: 'Aninha',
         description:
             'Viciada em cores, ela veio para inovar e diferenciar o seu cabelo.',
-        imagemUrl: "",
+        imagemUrl: "/professional/Aninha.jpeg",
         review: 5,
         reviewAmount: 87,
     },
@@ -14,19 +14,19 @@ const professionals: Professional[] = [
         id: 2,
         name: 'Carla',
         description:
-            'Carla que ama estética e tem um cuidado especial fazendo você não sentir dor.',
-        imagemUrl: "",
+            'Carla com seu talento para fazer alongamento de unha enormes e sua criatividade, o trabalho bem feito é garantido.',
+        imagemUrl: "/professional/carla.jpeg",
         review: 4.5,
-        reviewAmount: 39,
+        reviewAmount: 79,
     },
     {
         id: 3,
         name: 'Vitoria Gato',
         description:
-            'Vitoria com seu talento para fazer alongamento de unha enormes e sua criatividade, o trabalho bem feito é garantido.',
-        imagemUrl: "",
+            'Vitoria com suas mãos macias e com uma delicadeza fazendo voce não sentir dor',
+        imagemUrl: "/professional/vitoriagato.jpeg",
         review: 5,
-        reviewAmount: 91,
+        reviewAmount: 61,
     },
 ]
 

@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 import { Professional, Service } from '@salao/core'
 import Schedule from '@/components/shared/Schedule'
@@ -27,8 +28,12 @@ export default function PageAgendamento() {
     }
 
     function servicesChange(services: Service[]) {
-        selectServices(services)
-        setNextStep(services.length > 0)
+        if (typeof selectServices === 'function') {
+            selectServices(services)
+            setNextStep(services.length > 0)
+        } else {
+            console.error('selectServices is not a function')
+        }
     }
 
     function dataChange(data: Date) {
@@ -39,7 +44,7 @@ export default function PageAgendamento() {
     }
 
     return (
-        <div className="flex flex-col bg-purple-900">
+        <div className="flex flex-col text-red-500">
             <Header
                 title="Agendamento"
                 description="Seja atendido"
@@ -49,20 +54,21 @@ export default function PageAgendamento() {
                     NextStep={nextStep}
                     NextStepChange={setNextStep}
                     labels={[
-                        'Selecione o profissional',
                         'Informe os serviços',
+                        'Escolha os procedimentos',
+                        'Selecione o profissional',
                         'Escolha o horário',
                     ]}
                 >
-                    <ProfessionalInput
-                        professional={professional}
-                        professionalChange={professionalChange}
-                    />
                     <ServicesInput services={services} servicesChange={servicesChange} />
                     <DataInput
                         data={data}
                         dataChange={dataChange}
                         slotAmount={slotAmount}
+                    />
+                    <ProfessionalInput
+                        professional={professional}
+                        professionalChange={professionalChange}
                     />
                 </Schedule>
                 <Summary />

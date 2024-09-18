@@ -37,7 +37,7 @@ export default function HourInput(props: HourInputProps) {
         const notSelected = !hasHour && periodo.includes(hour)
         const periodoBloqueado =
             periodo.includes(hour) && periodo.some((h) => availableHour.includes(h))
-        const ocupado = availableHour.includes(hour)
+        const busy = availableHour.includes(hour)
 
         return (
             <div
@@ -48,14 +48,14 @@ export default function HourInput(props: HourInputProps) {
                         'bg-yellow-400': destacarHora,
                         'bg-red-500': notSelected || periodoBloqueado,
                         'text-white bg-green-500': selected,
-                        'cursor-not-allowed bg-zinc-800': ocupado,
+                        'cursor-not-allowed bg-zinc-800': busy,
                     }
                 )}
                 onMouseEnter={(_) => sethourHover(hour)}
                 onMouseLeave={(_) => sethourHover(null)}
                 onClick={() => {
                     if (notSelected) return
-                    if (ocupado || periodoBloqueado) return
+                    if (busy || periodoBloqueado) return
                     props.dataChange(DataUtils.setHour(props.data, hour))
                 }}
             >
@@ -63,10 +63,10 @@ export default function HourInput(props: HourInputProps) {
                     className={cn('text-sm text-zinc-400', {
                         'text-black font-semibold': destacarHora,
                         'text-white font-semibold': selected,
-                        'text-zinc-400 font-semibold': ocupado,
+                        'text-zinc-400 font-semibold': busy,
                     })}
                 >
-                    {notSelected || periodoBloqueado || ocupado ? (
+                    {notSelected || periodoBloqueado || busy ? (
                         <IconX size={18} className="text-white" />
                     ) : (
                         hour

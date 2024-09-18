@@ -38,7 +38,7 @@ export default function Summary() {
     }
 
     return (
-        <div className="flex flex-col bg-zinc-950 rounded-lg w-96 lg:w-80">
+        <div className="flex flex-col bg-purple-900 rounded-lg w-96 lg:w-80">
             {/* ... (rest of the JSX remains the same) ... */}
             <div className="flex flex-col gap-3">
                 <span className="text-xs uppercase text-zinc-400">Serviços</span>
