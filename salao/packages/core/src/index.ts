@@ -1,5 +1,6 @@
 export * from './constants'
 export * from './professional'
 export * from './Service'
+export * from './procedure'
 export * from './usuario'
 export * from './utils'

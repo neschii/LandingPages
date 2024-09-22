@@ -22,7 +22,7 @@ export default function Schedule(props: ScheduleProps) {
         props.NextStepChange(false)
     }
 
-function HandleStep() { 
+function renderStep() { 
     return ( 
         <div className="flex flex-col md:flex-row gap-4 md:gap-7">
                 {props.labels.map((label, i) => {
@@ -32,7 +32,7 @@ function HandleStep() {
                                 key={i}
                                 className={`
                                     flex justify-center items-center w-9 h-9 p-1 rounded-full font-bold
-                                    ${i === currentStep ? 'bg-white text-black' : 'text-pink-200 bg-violet-800'} 
+                                    ${i === currentStep ? 'bg-white text-black' : 'text-pink-200 bg-purple-800'} 
                                 `}
                             >
                                 {i + 1}
@@ -49,9 +49,9 @@ function HandleStep() {
 
      return (   
          
-        <div className="flex flex-col gap-10 items-center lg:items-center bg-violet-900">
+        <div className="flex flex-col gap-10 items-center lg:items-center bg-purple-900">
             
-            <div>{HandleStep()}</div>
+            <div>{renderStep()}</div>
             <div>{props.children?.[currentStep] ?? props.children}</div>
             <div className="flex gap-3 select-none ">
                 <button

@@ -4,12 +4,12 @@ import Link from 'next/link'
 
 export default function LandingPage() { 
     return ( 
- <div className="px-8 relative mx-auto h-screen">
+ <div className="px-8 relative mx-auto h-screen scroll-smooth">
             <Image src="/banners/salaobg.jpg" fill alt="Salão" className="object-cover" />
             <div className="
                     flex flex-col items-center
                     absolute top-0 left-0 w-full h-full
-                    bg-black/80 md:bg-transparent md:bg-gradient-to-r bg-gradient-to-r from-black/80 via-purple-500/50 to-black/80">
+                    md:bg-transparent md:bg-gradient-to-r bg-gradient-to-r from-black/80 via-purple-500/50 to-black/80">
             <Menu />  
             <div className="container flex-1 flex flex-col justify-center items-center gap-2 z-50">
                  <h1 className="flex flex-col items-center">

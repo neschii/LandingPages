@@ -17,8 +17,8 @@ export default function DayInput(props: DayInputProps) {
             <div
                 onClick={() => props.dataChange(data)}
                 className={`
-                    flex-1 flex flex-col items-center gap-2 py-4 cursor-pointer
-                    ${select ? 'bg-yellow-400 text-black' : 'text-zinc-400'}
+                    flex-1 flex flex-col  items-center gap-2 py-4 cursor-pointer
+                    ${select ? 'bg-yellow-400 text-black' : 'bg-purple-900 text-purple-400'}
                 `}
             >
                 <div className="flex items-center gap-1">
@@ -30,7 +30,7 @@ export default function DayInput(props: DayInputProps) {
                 <div
                     className={`
                         text-center text-xs font-light uppercase 
-                        ${select ? 'bg-black/10' : 'bg-white/10'}
+                        ${select ? 'bg-red-500/10' : 'bg-purple-800'}
                         py-0.5 px-3 rounded-full
                     `}
                 >
@@ -43,7 +43,7 @@ export default function DayInput(props: DayInputProps) {
     return (
         <div className="flex flex-col gap-5">
             <span className="text-sm uppercase text-zinc-400">Dias Disponíveis</span>
-            <div className="flex gap-5 bg-zinc-950 rounded-lg overflow-hidden">
+            <div className="flex gap-5 bg-purple-900 rounded-lg overflow-hidden">
                 {Array.from({ length: 7 })
                     .map((_, i) => new Date(DataUtils.today().getTime() + 86400000 * i))
                     .filter((date) => date.getDay() !== 0)

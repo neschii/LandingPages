@@ -1,24 +1,21 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { Professional, Service, Procedimento } from '@salao/core';
+import { Professional, Service, Procedure, AgendaUtils } from '@salao/core';
 import { DataUtils } from '@salao/core';
 import useUser from '../hooks/useUser';
 import useAPI from '../hooks/useAPI';
 
-interface SelectedService {
-  service: Service;
-  selectedProcedimentos: Procedimento[];
-}
-
 interface ScheduleContextProps { 
     professional: Professional | null;
-    selectedServices: SelectedService[];
+    services: Service[];
+    procedures: Procedure[];
     data: Date;
     availableHour: string[];
     totalDuration(): string;
     totalPrice(): number; 
     slotAmount(): number; 
     selectProfessional(professional: Professional): void;
-    selectServices(selectedServices: SelectedService[]): void;
+    selectServices(services: Service[]): void;
+    selectProcedures(procedures: Procedure[]): void;
     selectData(data: Date): void;
     scheduled(): Promise<void>;
 }
@@ -27,53 +24,58 @@ export const ScheduleContext = createContext({} as ScheduleContextProps);
 
 export function ProviderScheduling({ children }: { children: React.ReactNode }) {
     const [professional, setProfessional] = useState<Professional | null>(null);
-    const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
+    const [services, setServices] = useState<Service[]>([]);
+    const [procedures, setProcedures] = useState<Procedure[]>([]);
     const [data, setData] = useState<Date>(DataUtils.today());
 
     const { user } = useUser();
     const [availableHour, setAvailableHour] = useState<string[]>([]);
     const { httpGet, httpPost } = useAPI();
 
-    function selectProfessional(professional: Professional) { 
-        setProfessional(professional);
+    function selectProfessional(professional: Professional) {
+        setProfessional(professional)
     }
 
-    function selectServices(services: SelectedService[]) { 
-        setSelectedServices(services);
+    function selectServices(services: Service[]) {
+        setServices(services)
     }
 
-    function totalDuration() { 
-        const duration = selectedServices.reduce((acc, { selectedProcedimentos }) => {
-            return acc + selectedProcedimentos.reduce((procAcc, proc) => procAcc + proc.duration, 0);
-        }, 0);
-        return `${Math.trunc(duration / 60)}h ${duration % 60}m`;
+    function selectProcedures(selectedProcedures: Procedure[]) {
+        setProcedures(selectedProcedures);
     }
 
-    function totalPrice() {
-        return selectedServices.reduce((acc, { selectedProcedimentos }) => { 
-            return acc + selectedProcedimentos.reduce((procAcc, proc) => procAcc + proc.price, 0);
-        }, 0);
+    function totalDuration() {
+        return AgendaUtils.totalDuration(services)
+    }
+
+
+   function totalPrice() {
+        return services.reduce((acc, actual) => {
+            return (acc += actual.price)
+        }, 0)
     }
 
     const selectData = useCallback(function (hour: Date) {
         setData(hour);
     }, []);
 
-    function slotAmount() { 
-        const totalMinutes = selectedServices.reduce((acc, { selectedProcedimentos }) => {
-            return acc + selectedProcedimentos.reduce((procAcc, proc) => procAcc + proc.duration, 0);
-        }, 0);
-        return Math.ceil(totalMinutes / 15); // Assuming each slot is 15 minutes
+    function slotAmount() {
+        const totalSlots = services.reduce((acc, service) => {
+            return (acc += service.slotAmount)
+        }, 0)
+
+        return totalSlots
     }
 
-    async function scheduled() { 
+ async function scheduled() { 
         if (!user?.email) return;
 
         await httpPost('agendamentos', {
             emailClient: user.email,
             data: data!,
             professional: professional!,
-            selectedServices: selectedServices,
+            services: services,
+            procedures: procedures,
         });
 
         clear();
@@ -83,8 +85,10 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
         setData(DataUtils.today()); 
         setAvailableHour([]);
         setProfessional(null);
-        setSelectedServices([]);
+        setServices([]);
+        setProcedures([]);
     }
+
 
     const handleAvailableHour = useCallback(
         async function (data: Date, professional: Professional): Promise<string[]> {
@@ -107,12 +111,13 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
         handleAvailableHour(data, professional).then(setAvailableHour);
     }, [data, professional, handleAvailableHour]);
 
-    return (
+ return (
         <ScheduleContext.Provider
             value={{
                 data,
                 professional,
-                selectedServices,
+                services,
+                procedures,
                 availableHour,
                 totalDuration,
                 totalPrice,
@@ -120,6 +125,7 @@ export function ProviderScheduling({ children }: { children: React.ReactNode }) 
                 selectProfessional,
                 slotAmount,
                 selectServices,
+                selectProcedures,
                 scheduled,
             }}
         >

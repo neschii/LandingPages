@@ -1,69 +1,63 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Professional, Service, Procedimento } from '@salao/core'
-import Schedule from '@/components/shared/Schedule'
-import Header from '@/components/shared/Header'
-import useScheduling from '@/data/hooks/useScheduling'
-import ProfessionalInput from '@/components/schedules/ProfessionalInput'
-import ProcedimentosInput from '@/components/schedules/ProcedimentosInput'
-import ServicesInput from '@/components/schedules/ServicesInput'
-import Summary from '@/components/schedules/Summary'
-import DataInput from '@/components/schedules/DataInput'
+import { useState } from 'react';
+import { Professional, Service, Procedure } from '@salao/core';
+import { setNextStep, NextStep }  from '@/components/shared/Schedule';
+import Schedule  from '@/components/shared/Schedule';
+import Header from '@/components/shared/Header';
+import useScheduling from '@/data/hooks/useScheduling';
+import ProfessionalInput from '@/components/schedules/ProfessionalInput';
+import ProceduresInput from '@/components/schedules/ProceduresInput';
+import ServicesInput from '@/components/schedules/ServicesInput';
+import Summary from '@/components/schedules/Summary';
+import DataInput from '@/components/schedules/DataInput';
+
 
 export default function PageAgendamento() {
-    const [nextStep, setNextStep] = useState<boolean>(false)
+    const [currentStep, setCurrentStep] = useState<boolean>(false)
     const {
         professional,
         services,
+        procedures,
         data,
-        procedimentos,
         selectProfessional,
-        selectProcedimentos,
         selectServices,
+        selectProcedures,
         selectData,
         slotAmount,
-    } = useScheduling()
+    } = useScheduling();
 
     function professionalChange(professional: Professional) {
         selectProfessional(professional)
-        setNextStep(!!professional)
+        setCurrentStep(!!professional)
     }
 
-    function procedimentosChange(updatedProcedimentos: Procedimento[]) {
-        if (typeof selectProcedimentos === 'function') {
-            selectProcedimentos(updatedProcedimentos)
-            setNextStep(updatedProcedimentos.length > 0)
-        } else {
-            console.error('selectProcedimentos is not a function')
-        }
+        function servicesChange(services: Service[]) {
+        selectServices(services)
+        setCurrentStep(services.length > 0)
     }
 
-    function servicesChange(services: Service[]) {
-        if (typeof selectServices === 'function') {
-            selectServices(services)
-            setNextStep(services.length > 0)
-        } else {
-            console.error('selectServices is not a function')
-        }
+    function proceduresChange(procedures: Procedure[]) {
+        selectProcedures(procedures)
+        setCurrentStep(procedures.length > 0)
     }
 
-    function dataChange(data: Date) {
+  function dataChange(data: Date) {
         selectData(data)
-        const hasData = !!data
-        const hourValidation = data && data.getHours() >= 8 && data.getHours() <= 21
-        setNextStep(hasData && hourValidation)
-    }
 
+        const hasData = data
+        const hourValidation = data.getHours() >= 8 && data.getHours() <= 21
+        setCurrentStep(hasData && hourValidation)
+    }
     return (
-        <div className="flex flex-col text-red-500">
-            <Header
+        <div className="flex flex-col bg-purple-900">
+            <Header 
                 title="Agendamento"
                 description="Seja atendido"
             />
-            <div className="container flex flex-col lg:flex-row items-center lg:items-start lg:justify-around gap-10 lg:gap-0 py-10">
+            <div className="container flex flex-col lg:flex-row items-center lg:gap-50 overflow-hidden">
                 <Schedule
-                    NextStep={nextStep}
+                    NextStep={NextStep}
                     NextStepChange={setNextStep}
                     labels={[
                         'Informe os serviços',
@@ -72,11 +66,12 @@ export default function PageAgendamento() {
                         'Escolha o horário',
                     ]}
                 >
-                    <ServicesInput services={services} servicesChange={servicesChange} />
-                    <ProcedimentosInput
-                        services={procedimentos}
-                        onChange={procedimentosChange}
+                    <ServicesInput
+                        service={services}
+                        selectServices={selectServices}
+                        servicesChange={servicesChange}
                     />
+                    <ProceduresInput procedures={procedures} proceduresChange={proceduresChange} />
                     <ProfessionalInput
                         professional={professional}
                         professionalChange={professionalChange}
@@ -90,5 +85,5 @@ export default function PageAgendamento() {
                 <Summary />
             </div>
         </div>
-    )
+    );
 }

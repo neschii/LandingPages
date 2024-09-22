@@ -1,63 +1,60 @@
-import { useServices } from '@salao/ui'
-import { Service } from '@salao/core'
-import Image from 'next/image'
+import { useServices } from '@salao/ui';
+import { Service } from '@salao/core';
+import Image from 'next/image';
 
 export interface ServicesInputProps {
-    services: Service[]
-    servicesChange: (services: Service[]) => void
+    selectedServices?: Service[]; // Made optional
+    servicesChange: (services: Service[]) => void;
 }
 
-function Option(props: { service: Service; onClick: (s: Service) => void; selected?: boolean }) {
+function ServiceOption({ service, onSelect, isSelected }: { service: Service; onSelect: (s: Service) => void; isSelected: boolean }) {
     return (
         <div
-            className={`flex flex-col items-center cursor-pointer select-none border rounded-lg overflow-hidden 
-            ${props.selected ? 'border-green-400' : 'border-zinc-700'}`}
-            onClick={() => props.onClick(props.service)}
+            className={`flex flex-col items-center cursor-pointer border rounded-lg overflow-hidden 
+            ${isSelected ? 'border-purple-700' : 'border-transparent'} transition-all duration-200`}
+            onClick={() => onSelect(service)}
         >
             <Image
-                src={props.service.imagemURL}
-                alt={props.service.name}
+                src={service.imagemURL}
+                alt={service.name}
                 width={150}
                 height={120}
+                className="object-cover"
             />
-            <div
-                className={`
-                    py-2 w-full h-full text-center text-xs
-                    ${props.selected ? 'text-black bg-green-400 font-semibold' : 'text-zinc-400 font-light bg-zinc-900 '}
-                `}
+            <div className={`py-2 w-full text-center text-xs 
+                ${isSelected ? 'bg-purple-700 text-black' : 'bg-purple-800 text-white font-semibold'}`}
             >
-                {props.service.name}
+                {service.name}
             </div>
         </div>
-    )
+    );
 }
 
-export default function ServicesInput(props: ServicesInputProps) {
-    const { servicesChange } = props
-    const { services: allServices } = useServices()
+export default function ServicesInput({ selectedServices = [], servicesChange }: ServicesInputProps) {
+    const { services: allServices } = useServices();
 
-    function toggleService(service: Service) {
-        const serviceSelected = props.services?.find((s) => s.id === service.id)
-        servicesChange(
-            serviceSelected
-                ? props.services.filter((s) => s.id !== service.id)
-                : [...(props.services || []), service]
-        )
-    }
+    const handleServiceToggle = (service: Service) => {
+        const isSelected = selectedServices.some((s) => s.id === service.id);
+        const updatedServices = isSelected 
+            ? selectedServices.filter((s) => s.id !== service.id) 
+            : [...selectedServices, service];
+
+        servicesChange(updatedServices);
+    };
 
     return (
         <div className="flex flex-col gap-5">
             <span className="text-sm uppercase text-zinc-400">Serviços Disponíveis</span>
-            <div className="grid grid-cols-3 self-start gap-5">
+            <div className="grid grid-cols-3 gap-5">
                 {allServices.map((service) => (
-                    <Option
+                    <ServiceOption
                         key={service.id}
                         service={service}
-                        onClick={toggleService}
-                        selected={props.services?.some((serv) => serv.id === service.id) ?? false}
+                        onSelect={handleServiceToggle}
+                        isSelected={selectedServices.some((s) => s.id === service.id)}
                     />
                 ))}
             </div>
         </div>
-    )
+    );
 }

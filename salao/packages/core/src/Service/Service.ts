@@ -1,13 +1,15 @@
 export interface Service {
-    id: string
-    name: string
-    imagemURL: string
-    procedimentos: Procedimento[]
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  slotAmount: number;
+  imagemURL: string;
+  procedures?: Procedure[];
 }
 
-export interface Procedimento {
-    id: string
-    name: string
-    price: number
-    duration: number 
+export interface Procedure {
+  id: number;
+  name: string;
+  serviceId: number;
 }

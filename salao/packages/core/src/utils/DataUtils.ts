@@ -1,16 +1,16 @@
 export default class DataUtils {
     static today() {
-        const today = new Date()
-        today.setHours(0, 0, 0, 0)
-        return today
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return today;
     }
 
     // new Date(), '09:45'
-    static applyHour(data: Date, hour: string): Date {
-        const nData = new Date(data)
-        const parts = hour.split(':')
-        nData.setHours(parseInt(parts[0]!), parseInt(parts[1]!))
-        return nData
+    static setHour(data: Date, hour: string): Date {
+        const nData = new Date(data);
+        const parts = hour.split(':');
+        nData.setHours(parseInt(parts[0]!), parseInt(parts[1]!));
+        return nData;
     }
 
     static fmtData(data: Date): string {
@@ -19,7 +19,7 @@ export default class DataUtils {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-        })
+        });
     }
 
     static fmtDataNHour(data: Date): string {
@@ -30,6 +30,6 @@ export default class DataUtils {
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',
-        })
+        });
     }
 }

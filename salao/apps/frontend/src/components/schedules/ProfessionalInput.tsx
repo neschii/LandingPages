@@ -13,7 +13,7 @@ function ProfessionalCard({ professional, onClick, selected = false }: Professio
         <div
             className={`
                 flex flex-col items-center cursor-pointer select-none rounded-lg border w-[150px] h-[180px]
-                ${selected ? 'border-black' : 'border-red-500'} overflow-hidden
+                ${selected ? 'border-purple-700' : 'border-transparent'} overflow-hidden
             `}
             onClick={() => onClick(professional)}
         >
@@ -26,7 +26,7 @@ function ProfessionalCard({ professional, onClick, selected = false }: Professio
             <div
                 className={`
                     py-2 w-full h-full text-center text-xs
-                    ${selected ? 'text-black bg-pink-200 font-semibold' : 'text-red-500 font-light bg-zinc-900'}
+                    ${selected ? 'font-bold text-black bg-purple-700' : 'bg-purple-800 text-white font-bold'}
                 `}
             >
                 {professional.name ? professional.name.split(' ')[0] : 'Unknown'}
@@ -45,7 +45,7 @@ export default function ProfessionalInput({ professional, professionalChange }: 
 
     return (
         <div className="flex flex-col gap-5">
-            <span className="text-sm uppercase text-black">Profissionais Disponíveis</span>
+            <span className="text-sm uppercase text-zinc-400">Profissionais Disponíveis</span>
             <div className="grid grid-cols-2 md:grid-cols-3 self-start gap-5">
                 {professionals?.map((professional) => (
                     <ProfessionalCard
