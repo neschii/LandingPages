@@ -46,7 +46,7 @@ export default function Sumario() {
                     <span className="font-bold text-pink-200 leading-6">
                         Sumário do Agendamento
                     </span>
-                    <span className="text-xs text-zinc-500 leading-3">
+                    <span className="text-xs text-white leading-3">
                         Será um prazer atendê-lo!
                     </span>
                 </div>
