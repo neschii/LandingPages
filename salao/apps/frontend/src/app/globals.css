@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
 
 @layer base {
     :root {
@@ -30,18 +29,20 @@
         --chart-4: 280 65% 60%;
         --chart-5: 340 75% 55%;
     }
+}
 
+@layer base {
     * {
         @apply border-border;
     }
     body {
         @apply bg-background text-foreground;
-    } 
+    }
 }
 
 @layer components {
     .container {
-        @apply mx-auto lg:max-w-7xl lg:px-0;
+        @apply mx-auto lg:max-w-7xl px-5 lg:px-0;
     }
 
     .button {
@@ -51,8 +52,5 @@
     .text-gradient {
         @apply bg-gradient-to-r from-fuchsia-500 via-pink-500 to-purple-600;
         @apply bg-clip-text text-transparent;
-    }
-    .bg-blur {
-        @apply blur-sm;
     }
 }

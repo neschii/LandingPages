@@ -1,17 +1,17 @@
 'use client'
-import Header from "@/components/shared/Header"
-import ScheduleSuccess from "@/components/schedules/ScheduleSuccess"
+import AgendadoComSucesso from '@/components/agendamento/AgendadoComSucesso'
+import Cabecalho from '@/components/shared/Cabecalho'
 
-export default function PageSchedule() { 
-  return (
-    <div className="flex flex-col bg-pink-200">
-      <Header 
-      title="Agendamento de Serviços"
-      description="Seu horário está garantido e será um prazer te atender!"
-      />
-    <div className="container flex flex-col justify-around items-center py-10 gap-1">
-         <ScheduleSuccess />
-  </div>
-  </div>
-  )
+export default function PaginaAgendamento() {
+    return (
+        <div className="flex flex-col bg-purple-900 ">
+            <Cabecalho
+                titulo="Agendamento de Serviços"
+                descricao="Seu horário está garantido e será um prazer te atender!"
+            />
+            <div className="container flex flex-col justify-around items-center py-10 gap-1">
+                <AgendadoComSucesso />
+            </div>
+        </div>
+    )
 }

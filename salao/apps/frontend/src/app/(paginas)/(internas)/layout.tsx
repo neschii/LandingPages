@@ -1,9 +1,14 @@
 'use client'
+import { ProvedorAgendamento } from '@/data/contexts/ContextoAgendamento'
+import ForcarUsuario from '@/components/shared/ForcarUsuario'
+import Pagina from '@/components/shared/Pagina'
 
-import Page from "@/components/shared/Page"
-
-export default function Layout(props: any) { 
+export default function Layout(props: any) {
     return (
-            <Page>{props.children}</Page>
-)
+        <ForcarUsuario>
+            <ProvedorAgendamento>
+                <Pagina>{props.children}</Pagina>
+            </ProvedorAgendamento>
+        </ForcarUsuario>
+    )
 }

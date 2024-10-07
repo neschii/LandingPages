@@ -1,89 +1,97 @@
-'use client';
+'use client'
+import Image from 'next/image';
+import { useState } from 'react'
+import { Profissional, Servico } from '@salao/core'
+import useAgendamento from '@/data/hooks/useAgendamento'
+import Sumario from '@/components/agendamento/Sumario'
+import ServicosInput from '@/components/agendamento/ServicosInput'
+import ProfissionalInput from '@/components/agendamento/ProfissionalInput'
+import Passos from '@/components/shared/Passos'
+import DataInput from '@/components/agendamento/DataInput'
+import Cabecalho from '@/components/shared/Cabecalho'
 
-import { useState } from 'react';
-import { Professional, Service, Procedure } from '@salao/core';
-import { setNextStep, NextStep }  from '@/components/shared/Schedule';
-import Schedule  from '@/components/shared/Schedule';
-import Header from '@/components/shared/Header';
-import useScheduling from '@/data/hooks/useScheduling';
-import ProfessionalInput from '@/components/schedules/ProfessionalInput';
-import ProceduresInput from '@/components/schedules/ProceduresInput';
-import ServicesInput from '@/components/schedules/ServicesInput';
-import Summary from '@/components/schedules/Summary';
-import DataInput from '@/components/schedules/DataInput';
-
-
-export default function PageAgendamento() {
-    const [currentStep, setCurrentStep] = useState<boolean>(false)
+export default function PaginaAgendamento() {
+    const [permiteProximoPasso, setPermiteProximoPasso] = useState<boolean>(false)
     const {
-        professional,
-        services,
-        procedures,
+        profissional,
+        servicos,
         data,
-        selectProfessional,
-        selectServices,
-        selectProcedures,
-        selectData,
-        slotAmount,
-    } = useScheduling();
+        selecionarProfissional,
+        selecionarServicos,
+        selecionarData,
+        quantidadeDeSlots,
+    } = useAgendamento()
 
-    function professionalChange(professional: Professional) {
-        selectProfessional(professional)
-        setCurrentStep(!!professional)
+    function profissionalMudou(profissional: Profissional) {
+        selecionarProfissional(profissional)
+        setPermiteProximoPasso(!!profissional)
     }
 
-        function servicesChange(services: Service[]) {
-        selectServices(services)
-        setCurrentStep(services.length > 0)
+    function servicosMudou(servicos: Servico[]) {
+        selecionarServicos(servicos)
+        setPermiteProximoPasso(servicos.length > 0)
     }
 
-    function proceduresChange(procedures: Procedure[]) {
-        selectProcedures(procedures)
-        setCurrentStep(procedures.length > 0)
+    function dataMudou(data: Date) {
+        selecionarData(data)
+
+        const temData = data
+        const horaValida = data.getHours() >= 8 && data.getHours() <= 21
+        setPermiteProximoPasso(temData && horaValida)
     }
 
-  function dataChange(data: Date) {
-        selectData(data)
-
-        const hasData = data
-        const hourValidation = data.getHours() >= 8 && data.getHours() <= 21
-        setCurrentStep(hasData && hourValidation)
-    }
     return (
-        <div className="flex flex-col bg-purple-900">
-            <Header 
-                title="Agendamento"
-                description="Seja atendido"
+        <div className="relative min-h-screen flex flex-col">
+            <Image 
+                src="/banners/salaobg.jpg" 
+                fill 
+                alt="Salão" 
+                className="object-cover blur-[2px] "
+                priority
             />
-            <div className="container flex flex-col lg:flex-row items-center lg:gap-50 overflow-hidden">
-                <Schedule
-                    NextStep={NextStep}
-                    NextStepChange={setNextStep}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-purple-500/50 to-black/80" />
+            
+            <div className="relative z-10 flex flex-col flex-grow w-full">
+                <Cabecalho 
+                    titulo="Agendamentos"
+                    descricao="Agende o seu horario no conforto de casa e aonde quiser!"
+                />
+                
+<main className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-2">
+    <div className="bg-purple-900 rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 max-w-[1200px] mx-auto flex flex-col" style={{height: '78vh'}}>
+        <div className="flex flex-col lg:flex-row lg:space-x-8 flex-grow">
+            <div className="lg:w-2/3 flex flex-col">
+                <Passos
+                    permiteProximoPasso={permiteProximoPasso}
+                    permiteProximoPassoMudou={setPermiteProximoPasso}
                     labels={[
-                        'Informe os serviços',
-                        'Escolha os procedimentos',
                         'Selecione o profissional',
+                        'Informe os serviços',
                         'Escolha o horário',
                     ]}
-                >
-                    <ServicesInput
-                        service={services}
-                        selectServices={selectServices}
-                        servicesChange={servicesChange}
+                > 
+                    <ProfissionalInput
+                        profissional={profissional}
+                        profissionalMudou={profissionalMudou}
                     />
-                    <ProceduresInput procedures={procedures} proceduresChange={proceduresChange} />
-                    <ProfessionalInput
-                        professional={professional}
-                        professionalChange={professionalChange}
+                    <ServicosInput 
+                        servicos={servicos} 
+                        servicosMudou={servicosMudou} 
                     />
                     <DataInput
                         data={data}
-                        dataChange={dataChange}
-                        slotAmount={slotAmount}
+                        dataMudou={dataMudou}
+                        quantidadeDeSlots={quantidadeDeSlots()}
                     />
-                </Schedule>
-                <Summary />
+                </Passos>
+            </div>
+            <div className="lg:w-1/3 mt-6 lg:mt-0">
+                <Sumario />
             </div>
         </div>
-    );
+    </div>
+</main>
+            </div>
+        </div>
+    )
 }

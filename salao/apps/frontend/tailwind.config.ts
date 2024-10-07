@@ -3,7 +3,6 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
-    "./src/**/*.{html,js}",
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
@@ -11,18 +10,15 @@ const config = {
 	],
   prefix: "",
   theme: {
-    container: { 
-      center: true, 
+    container: {
+      center: true,
       padding: "2rem",
-      screens: { 
-      "2x1": "1400px",
+      screens: {
+        "2xl": "1400px",
       },
     },
-    extend: { 
-      fontFamily: {
-        macondo: ['Macondo', 'cursive'],
-    },
-      colors: { 
+    extend: {
+      colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -77,12 +73,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-  },  
- plugins: [
-    require("tailwindcss-animate"),
-    require("@designbycode/tailwindcss-text-stroke")
- ]
+  },
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
-
-export default config;
+export default config

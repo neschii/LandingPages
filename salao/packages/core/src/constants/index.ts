@@ -1,7 +1,5 @@
+import profissionais from './profissionais'
+import servicos from './servicos'
 
-import professionals from './professional'
-import services from './services'
-
-
-const SLOT_TIME = 15
-export { SLOT_TIME, professionals, services }
+const TEMPO_SLOT = 15
+export { TEMPO_SLOT, profissionais, servicos }

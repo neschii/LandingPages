@@ -1,26 +1,26 @@
 export default class TelefoneUtils {
-    static fmt(telefone: string): string {
+    static formatar(telefone: string): string {
         if (!telefone) return ''
-        const numbers = this.desform(telefone)
-        return numbers.length <= 10
-            ? this.repNumber(numbers, '(xx) xxxx-xxxx')
-            : this.repNumber(numbers, '(xx) xxxxx-xxxx')
+        const numeros = this.desformatar(telefone)
+        return numeros.length <= 10
+            ? this.substituirNumeros(numeros, '(xx) xxxx-xxxx')
+            : this.substituirNumeros(numeros, '(xx) xxxxx-xxxx')
     }
 
-    static desform(telefone: string): string {
+    static desformatar(telefone: string): string {
         if (!telefone) return ''
         return telefone.replace(/\D/g, '').slice(0, 11)
     }
 
-    private static repNumber(telefone: string, ref: string): string {
-        let fmtd = telefone
+    private static substituirNumeros(telefone: string, ref: string): string {
+        let formatado = telefone
             .split('')
-            .reduce((telefone, number) => {
-                return telefone.replace('x', number)
+            .reduce((telefone, numero) => {
+                return telefone.replace('x', numero)
             }, ref)
             .replace(/x/g, '')
-        if (telefone.length <= 2) fmtd = fmtd.replace(')', '').replace(' ', '')
-        if (telefone.length <= 6) fmtd = fmtd.replace('-', '')
-        return fmtd
+        if (telefone.length <= 2) formatado = formatado.replace(')', '').replace(' ', '')
+        if (telefone.length <= 6) formatado = formatado.replace('-', '')
+        return formatado
     }
 }
