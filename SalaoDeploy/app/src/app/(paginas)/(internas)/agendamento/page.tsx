@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import { useState } from 'react'
-import { Profissional, Servico } from '@barba/core'
+import { Profissional, Servico } from '@salao/core'
 import useAgendamento from '@/data/hooks/useAgendamento'
 import Sumario from '@/components/agendamento/Sumario'
 import ServicosInput from '@/components/agendamento/ServicosInput'
