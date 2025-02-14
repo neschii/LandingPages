@@ -1,5 +1,7 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/(paginas)/(usuario)/entrar/page": "app/(paginas)/(usuario)/entrar/page.js",
-  "/(paginas)/(landing)/page": "app/(paginas)/(landing)/page.js"
+  "/(paginas)/(landing)/page": "app/(paginas)/(landing)/page.js",
+  "/(paginas)/(internas)/agendamento/page": "app/(paginas)/(internas)/agendamento/page.js",
+  "/(paginas)/(internas)/agendamento/sucesso/page": "app/(paginas)/(internas)/agendamento/sucesso/page.js"
 }

@@ -36,6 +36,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(paginas)/(usuario)/entrar/page.js"
     ],
+    "/(paginas)/(internas)/agendamento/sucesso/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(paginas)/(internas)/agendamento/sucesso/page.js"
+    ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
